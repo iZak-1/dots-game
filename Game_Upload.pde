@@ -135,8 +135,8 @@ void mouseClicked(){
       ballArray[i].moveSpd=ballArray[i].speed;
       counter++;
       if(ballArray[0].speed<width/250) {
-        ballArray[0].speed*=1+(width/50000);
-      } else if(ballArray[0].mySize<=width/5) {
+        ballArray[0].speed+=(width/25000);
+      } else if(ballArray[0].mySize<=width/25) {
         ballArray[0].mySize*=1.05;
       }
       if(counter%2==0) {
