@@ -139,7 +139,7 @@ void mouseClicked(){
       } else if(ballArray[0].mySize<=width/25) {
         ballArray[0].mySize*=1.05;
       }
-      if(counter%2==0) {
+      if(counter%5==0) {
         ballArray=(Ball[])append(ballArray, new Ball());
       }
       didClick=true;
