@@ -5,7 +5,7 @@ Instructions: click to revive dead balls. You can't revive a ball if the white b
 Ball[] ballArray;
 int counter;
 void setup() {
-  size(1000,500); //size((int)(0.95*window.innerWidth), (int)(0.95*window.innerHeight));
+  size((int)(0.95*window.innerWidth), (int)(0.95*window.innerHeight));
   ballArray = new Ball[20];
   for (int i=0; i<ballArray.length; i++) {  
     ballArray[i]=new Ball();
