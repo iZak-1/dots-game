@@ -5,7 +5,7 @@ Instructions: click to revive dead balls. You can't revive a ball if the white b
 Ball[] ballArray;
 int counter;
 void setup() {
-  size(1000,500);
+  size((int)(0.95*window.innerWidth), (int)(0.95*window.innerHeight));
   ballArray = new Ball[20];
   for (int i=0; i<ballArray.length; i++) {  
     ballArray[i]=new Ball();
@@ -31,7 +31,7 @@ void keyPressed() {
 }
 void mouseClicked(){
   for (int i=0; i<ballArray.length; i++) {  
-    if(dist(mouseX,mouseY,ballArray[i].myX,ballArray[i].myY)<=ballArray[i].mySize&&ballArray[i].myLife<0&&(dist(ballArray[0].myX,ballArray[0].myY,ballArray[i].myX,ballArray[i].myY)>=ballArray[0].mySize)){
+    if(dist(mouseX,mouseY,ballArray[i].myX,ballArray[i].myY)<=ballArray[i].mySize&&ballArray[i].myLife<=0&&(dist(ballArray[0].myX,ballArray[0].myY,ballArray[i].myX,ballArray[i].myY)>=ballArray[0].mySize)){
       ballArray[i].myLife=ballArray[i].maxLife;
       ballArray[i].moveSpd=ballArray[i].speed;
       counter++;
@@ -58,20 +58,20 @@ class Ball {
     moveSpd=speed;
     mySize=width/40;
     maxLife=(int)(250+(float)Math.random()*5000);
-    myLife=maxLife;
+    myLife=(int)(100+(float)Math.random()*2000);
     myColor = color((int)(255*Math.random()), (int)(255*Math.random()), (int)(255*Math.random()));
   }
   
   void move() {
-    myX+=moveSpd*Math.pow(((float)(myLife)/maxLife),1/10);
-    myLife-=1;
+    myX+=moveSpd*Math.pow(((float)myLife/maxLife),0.5);
+    if(myLife>0) {myLife-=1;}
     if(myX>width+mySize) {
       myX=0-mySize;
     }
   }
   void show() {
     if(myLife>0) {
-      fill(myColor, 50+((float)myLife/maxLife)*205);
+      fill(myColor, 50+(float)(Math.pow(((float)myLife/maxLife),0.5)*205));
       ellipse(myX, myY, mySize, mySize);
     } else{
       fill(255,100,100);
