@@ -76,11 +76,13 @@ class OddBall extends Ball {
 Ball[] ballArray;
 int counter;
 int numDead;
-boolean didClick=false;
-boolean prep=true;
+boolean didClick;
+boolean prep;
 int score;
 int startTime;
 void setup() {
+  prep=true;
+  didClick=false;
   size((int)(0.95*window.innerWidth), (int)(0.95*window.innerHeight));
   ballArray = new Ball[20];
   for (int i=0; i<ballArray.length; i++) {  
@@ -96,6 +98,7 @@ void setup() {
 void draw() {
   background(0,0,0);
   if(prep) {
+    fill(255);
     textSize(width/50);
     text("Directions:\nDots will move across the screen at different speeds. As a dot approaches its death, it will get slower and more transparent. Once a dot dies, it'll turn into an 'x'. To revive a dead dot, click on it. You can't revive a dot when the white circle is over it. You gain one point for every dot you revive, and lose one for every misclick. As time goes by, the white circle will get faster and you'll get more dots. If there are 10 dead dots at a time, you lose.", width/20,height/10, 18*width/20,9*height/10);
     textSize(width/75);
@@ -124,8 +127,11 @@ void draw() {
 void keyPressed() {
   if(prep) {
     prep = false;
+    score=0;
+  } else if(numDead>10) {
+    setup();
+    loop();
   }
-  score=0;
 }
 void mouseClicked(){
   didClick=false;
@@ -159,5 +165,5 @@ void DeadScreen() {
   fill(255,0,0);
   text("You lost!",width/2,height/2);
   textSize(width/50);
-  text("You lasted "+round((millis()-startTime)/100)/10.0+" seconds, and got a score of "+score,width/2,3*height/4);
+  text("You lasted "+round((millis()-startTime)/100)/10.0+" seconds, and got a score of "+score+"\npress any key to restart",width/2,3*height/4);
 }
