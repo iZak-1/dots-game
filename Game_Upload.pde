@@ -5,7 +5,7 @@ Instructions: click to revive dead balls. You can't revive a ball if the white b
 Ball[] ballArray;
 int counter;
 void setup() {
-  size((int)(0.95*window.innerWidth), (int)(0.95*window.innerHeight));
+  size(1000,500); //size((int)(0.95*window.innerWidth), (int)(0.95*window.innerHeight));
   ballArray = new Ball[20];
   for (int i=0; i<ballArray.length; i++) {  
     ballArray[i]=new Ball();
@@ -35,7 +35,7 @@ void mouseClicked(){
       ballArray[i].myLife=ballArray[i].maxLife;
       ballArray[i].moveSpd=ballArray[i].speed;
       counter++;
-      ballArray[0].speed+=(width/100000);
+      ballArray[0].speed*=1+(width/50000);
       if(counter%5==0) {
         ballArray=(Ball[])append(ballArray, new Ball());
       }
