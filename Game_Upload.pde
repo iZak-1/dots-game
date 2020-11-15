@@ -97,7 +97,7 @@ void draw() {
   if(prep) {
     fill(255);
     textSize(width/50);
-    text("Directions:\nDots will move across the screen at different speeds. As a dot approaches its death, it will get slower and more transparent. Once a dot dies, it'll turn into an 'x'. To revive a dead dot, click on it. You can't revive a dot when the white circle is over it. You gain one point for every dot you revive, and lose one for every misclick. As time goes by, the white circle will get faster and you'll get more dots. If there are 10 dead dots at a time, you lose.\nPlease don't use a stylus. The game works best when your mouse can't teleport.", width/20,height/10, 18*width/20,9*height/10);
+    text("Directions:\n\nDots will move across the screen at different speeds. As a dot approaches its death, it will get slower and more transparent. Once a dot dies, it'll turn into an 'x'. To revive a dead dot, click on it. You can't revive a dot when the white circle is over it. You gain one point for every dot you revive, and lose one for every misclick. As time goes by, the white circle will get faster and you'll get more dots. If there are 10 dead dots at a time, you lose.\n\nPlease don't use a touchscreen. The game works best when your mouse can't teleport.", width/20,height/10, 18*width/20,9*height/10);
     textSize(width/75);
     text("Click any key to begin", width/2,2*height/3);
   } else{
