@@ -140,8 +140,8 @@ void mouseClicked(){
       ballArray[i].myLife=ballArray[i].maxLife;
       ballArray[i].moveSpd=ballArray[i].speed;
       counter++;
-      if(ballArray[0].speed<width/250) {
-        ballArray[0].speed+=(width/25000);
+      if(ballArray[0].speed<width/500) {
+        ballArray[0].speed+=(width/50000);
       } else if(ballArray[0].mySize<=width/25) {
         ballArray[0].mySize*=1.05;
       }
