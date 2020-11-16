@@ -9,13 +9,13 @@ class Ball {
     moveSpd=speed;
     mySize=width/40;
     maxLife=(int)(250+(float)Math.random()*5000);
-    myLife=(int)(100+(float)Math.random()*2000);
+    myLife=(int)(50+(float)Math.random()*5000);
     myColor = color((int)(255*Math.random()), (int)(255*Math.random()), (int)(255*Math.random()));
   }
   
   void move() {
     myX+=moveSpd*Math.pow(((float)myLife/maxLife),0.5);
-    if(myLife>0) {myLife-=1;}
+    if(myLife>0&&myX>mySize&&myX<width-mySize) {myLife-=1;}
     if(myX>width+mySize) {
       myX=0-mySize;
     }
