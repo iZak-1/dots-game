@@ -99,7 +99,7 @@ void draw() {
     textSize(width/50);
     text("Directions:\n\nDots will move across the screen at different speeds. As a dot approaches its death, it will get slower and more transparent. Once a dot dies, it'll turn into an 'x'. To revive a dead dot, click on it. You can't revive a dot when the white circle is over it. You gain one point for every dot you revive, and lose one for every misclick. As time goes by, the white circle will get faster and you'll get more dots. If there are 10 dead dots at a time, you lose.\n\nPlease don't use a touchscreen. The game works best when your mouse can't teleport.", width/20,height/10, 18*width/20,9*height/10);
     textSize(width/75);
-    text("Click any key to begin", width/2,2*height/3);
+    text("Press the spacebar to begin", width/2,2*height/3);
   } else{
     
     numDead=0;
@@ -122,10 +122,10 @@ void draw() {
 }  
 
 void keyPressed() {
-  if(prep) {
+  if(prep&&keyCode==32) {
     prep = false;
     score=0;
-  } else if(numDead>10) {
+  } else if(numDead>10&&keyCode==32) {
     setup();
     loop();
   }
@@ -162,5 +162,5 @@ void DeadScreen() {
   fill(255,0,0);
   text("You lost!",width/2,height/2);
   textSize(width/50);
-  text("You lasted "+round((millis()-startTime)/100)/10.0+" seconds, and got a score of "+score+"\npress any key to restart",width/2,3*height/4);
+  text("You lasted "+round((millis()-startTime)/100)/10.0+" seconds, and got a score of "+score+"\npress the space key to restart",width/2,3*height/4);
 }
