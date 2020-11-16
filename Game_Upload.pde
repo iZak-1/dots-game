@@ -8,8 +8,8 @@ class Ball {
     speed=(width/1000)*(3+5*(float)Math.random());
     moveSpd=speed;
     mySize=width/40;
-    maxLife=(int)(250+(float)Math.random()*5000);
-    myLife=(int)(50+(float)Math.random()*5000);
+    maxLife=(int)(1000+(float)Math.random()*5000);
+    myLife=(int)(50+(float)Math.random()*3000);
     myColor = color((int)(255*Math.random()), (int)(255*Math.random()), (int)(255*Math.random()));
   }
   
@@ -80,6 +80,7 @@ int startTime;
 void setup() {
   prep=true;
   didClick=false;
+  startTime=0;
   size((int)(0.95*window.innerWidth), (int)(0.95*window.innerHeight));
   ballArray = new Ball[20];
   for (int i=0; i<ballArray.length; i++) {  
@@ -97,7 +98,7 @@ void draw() {
   if(prep) {
     fill(255);
     textSize(width/50);
-    text("Directions:\n\nDots will move across the screen at different speeds. As a dot approaches its death, it will get slower and more transparent. Once a dot dies, it'll turn into an 'x'. To revive a dead dot, click on it. You can't revive a dot when the white circle is over it. You gain one point for every dot you revive, and lose one for every misclick. As time goes by, the white circle will get faster and you'll get more dots. If there are 10 dead dots at a time, you lose.\n\nPlease don't use a touchscreen. The game works best when your mouse can't teleport.", width/20,height/10, 18*width/20,9*height/10);
+    text("Directions:\n\nDots will move across the screen at different speeds. As a dot approaches its death, it will get slower and more transparent. Once a dot dies, it'll turn into an 'x'. To revive a dead dot, click on it. You can't revive a dot when the white circle is over it. You gain one point for every dot you revive, and lose one for every misclick. As time goes by, the white circle will get faster and you'll get more dots. If 20% of the dots are dead, you lose.\n\nPlease don't use a touchscreen. The game works best when your mouse can't teleport.", width/20,height/10, 18*width/20,9*height/10);
     textSize(width/75);
     text("Press the spacebar to begin", width/2,2*height/3);
   } else{
@@ -113,7 +114,7 @@ void draw() {
       if(ballArray[i].myLife<=0==true) {
         numDead++;
       }
-      if(numDead>10) {
+      if(numDead>ballArray.length/5.0) {
         noLoop();
         DeadScreen();
       }
@@ -123,6 +124,7 @@ void draw() {
 
 void keyPressed() {
   if(prep&&keyCode==32) {
+    startTime=0;
     prep = false;
     score=0;
   } else if(numDead>10&&keyCode==32) {
