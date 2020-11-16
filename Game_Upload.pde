@@ -80,7 +80,7 @@ int startTime;
 void setup() {
   prep=true;
   didClick=false;
-  startTime=0;
+  startTime=millis();;
   size((int)(0.95*window.innerWidth), (int)(0.95*window.innerHeight));
   ballArray = new Ball[20];
   for (int i=0; i<ballArray.length; i++) {  
@@ -124,7 +124,7 @@ void draw() {
 
 void keyPressed() {
   if(prep&&keyCode==32) {
-    startTime=0;
+    startTime=millis();
     prep = false;
     score=0;
   } else if(numDead>10&&keyCode==32) {
