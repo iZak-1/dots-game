@@ -87,6 +87,8 @@ void setup() {
   prep=true;
   didClick=false;
   startTime=millis();;
+  
+  //CHANGE FOR GITHUB!
   size((int)(0.95*window.innerWidth), (int)(0.95*window.innerHeight));
   ballArray = new Ball[20];
   for (int i=0; i<ballArray.length; i++) {  
@@ -141,7 +143,7 @@ void keyPressed() {
 void mouseClicked(){
   didClick=false;
   for (int i=0; i<ballArray.length; i++) {  
-    if(dist(mouseX,mouseY,ballArray[i].myX,ballArray[i].myY)<=ballArray[i].mySize&&ballArray[i].myLife<=0&&(dist(ballArray[0].myX,ballArray[0].myY,ballArray[i].myX,ballArray[i].myY)>=ballArray[0].mySize)){
+    if(dist(mouseX,mouseY,ballArray[i].myX,ballArray[i].myY)<=ballArray[i].mySize/2&&ballArray[i].myLife<=0&&(dist(ballArray[0].myX,ballArray[0].myY,ballArray[i].myX,ballArray[i].myY)>=ballArray[0].mySize/2)){
       ballArray[i].myLife=ballArray[i].maxLife;
       ballArray[i].moveSpd=ballArray[i].speed;
       counter++;
