@@ -5,7 +5,7 @@ class Ball {
   Ball() {
     speed=(width/1000)*(3+5*(float)Math.random());
     moveSpd=speed;
-    mySize=width/40;
+    mySize=(0.75+0.5*(float)Math.random())*width/40;
     myX=width*(float)Math.random();
     myY=mySize/2+(height-mySize)*(float)Math.random();
     maxLife=(int)(1000+(float)Math.random()*5000);
@@ -22,14 +22,20 @@ class Ball {
   }
   void show() {
     if(myLife>0) {
+      noStroke();
       fill(myColor, 50+(float)(Math.pow(((float)myLife/maxLife),0.5)*205));
-      ellipse(myX, myY, mySize, mySize);
     } else{
-      textSize(width/40);
-      fill(255,100,100);
-      text("X",myX,myY);
+      stroke(255,0,0);
+      strokeWeight(2);
+      line(myX+mySize/2*cos(PI/4),myY+mySize/2*sin(PI/4),myX-mySize/2*cos(PI/4),myY-mySize/2*sin(PI/4));
+      line(myX+mySize/2*cos(PI/4),myY-mySize/2*sin(PI/4),myX-mySize/2*cos(PI/4),myY+mySize/2*sin(PI/4));
+
       moveSpd=0;
+      stroke(255,255,255);
+      noFill();
+      strokeWeight(1);
     }
+    ellipse(myX, myY, mySize, mySize);
   }
 }
 
@@ -90,6 +96,7 @@ void setup() {
     }
   }
   frameRate(100);
+  textAlign(CENTER,TOP);
 }
 
 void draw() {
@@ -97,11 +104,9 @@ void draw() {
   if(prep) {
     fill(255);
     textSize(width/50);
-    textAlign(CENTER,TOP);
     text("Directions:\n\nDots will move across the screen at different speeds. As a dot approaches its death, it will get slower and more transparent. Once a dot dies, it'll turn into an 'x'. To revive a dead dot, click on it. You can't revive a dot when the white circle is over it. You gain one point for every dot you revive, and lose one for every misclick. As time goes by, the white circle will get faster and you'll get more dots. If 20% of the dots are dead, you lose.\n\nPlease don't use a touchscreen. The game works best when your mouse can't teleport.", width/20,height/10, 18*width/20,9*height/10);
     textSize(width/75);
     text("Press the spacebar to begin", width/2,2*height/3);
-    textAlign(CENTER,CENTER);
   } else{
     numDead=0;
     textSize(width/50);
