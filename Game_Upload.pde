@@ -3,11 +3,11 @@ class Ball {
   color myColor;
   int myLife, maxLife;
   Ball() {
-    myX=width*(float)Math.random();
-    myY=height*(float)Math.random();
     speed=(width/1000)*(3+5*(float)Math.random());
     moveSpd=speed;
     mySize=width/40;
+    myX=mySize+(width-(mySize*2))*(float)Math.random();
+    myY=height*(float)Math.random();
     maxLife=(int)(1000+(float)Math.random()*5000);
     myLife=(int)(50+(float)Math.random()*3000);
     myColor = color((int)(255*Math.random()), (int)(255*Math.random()), (int)(255*Math.random()));
@@ -89,20 +89,20 @@ void setup() {
       ballArray[i]=new OddBall();
     }
   }
-  textAlign(CENTER,TOP);
   frameRate(100);
 }
 
 void draw() {
   background(0,0,0);
   if(prep) {
+    textAlign(CENTER,TOP);
     fill(255);
     textSize(width/50);
     text("Directions:\n\nDots will move across the screen at different speeds. As a dot approaches its death, it will get slower and more transparent. Once a dot dies, it'll turn into an 'x'. To revive a dead dot, click on it. You can't revive a dot when the white circle is over it. You gain one point for every dot you revive, and lose one for every misclick. As time goes by, the white circle will get faster and you'll get more dots. If 20% of the dots are dead, you lose.\n\nPlease don't use a touchscreen. The game works best when your mouse can't teleport.", width/20,height/10, 18*width/20,9*height/10);
     textSize(width/75);
     text("Press the spacebar to begin", width/2,2*height/3);
   } else{
-    
+    textAlign(CENTER,CENTER);
     numDead=0;
     textSize(width/50);
     fill(255);
@@ -127,9 +127,10 @@ void keyPressed() {
     startTime=millis();
     prep = false;
     score=0;
-  } else if(numDead>10&&keyCode==32) {
+  } else if(numDead>ballArray.length/5.0&&keyCode==32) {
     setup();
     loop();
+    prep=false;
   }
 }
 void mouseClicked(){
