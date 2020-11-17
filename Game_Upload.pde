@@ -6,8 +6,8 @@ class Ball {
     speed=(width/1000)*(3+5*(float)Math.random());
     moveSpd=speed;
     mySize=width/40;
-    myX=mySize+(width-(mySize*2))*(float)Math.random();
-    myY=height*(float)Math.random();
+    myX=width*(float)Math.random();
+    myY=mySize/2+(height-mySize)*(float)Math.random();
     maxLife=(int)(1000+(float)Math.random()*5000);
     myLife=(int)(50+(float)Math.random()*3000);
     myColor = color((int)(255*Math.random()), (int)(255*Math.random()), (int)(255*Math.random()));
@@ -90,19 +90,18 @@ void setup() {
     }
   }
   frameRate(100);
+  textAlign(CENTER,CENTER);
 }
 
 void draw() {
   background(0,0,0);
   if(prep) {
-    textAlign(CENTER,TOP);
     fill(255);
     textSize(width/50);
-    text("Directions:\n\nDots will move across the screen at different speeds. As a dot approaches its death, it will get slower and more transparent. Once a dot dies, it'll turn into an 'x'. To revive a dead dot, click on it. You can't revive a dot when the white circle is over it. You gain one point for every dot you revive, and lose one for every misclick. As time goes by, the white circle will get faster and you'll get more dots. If 20% of the dots are dead, you lose.\n\nPlease don't use a touchscreen. The game works best when your mouse can't teleport.", width/20,height/10, 18*width/20,9*height/10);
+    text("Directions:\n\nDots will move across the screen at different speeds. As a dot approaches its death, it will get slower and more transparent. Once a dot dies, it'll turn into an 'x'. To revive a dead dot, click on it. You can't revive a dot when the white circle is over it. You gain one point for every dot you revive, and lose one for every misclick. As time goes by, the white circle will get faster and you'll get more dots. If 20% of the dots are dead, you lose.\n\nPlease don't use a touchscreen. The game works best when your mouse can't teleport.", width/20,height/10, 18*width/20,height/2);
     textSize(width/75);
     text("Press the spacebar to begin", width/2,2*height/3);
   } else{
-    textAlign(CENTER,CENTER);
     numDead=0;
     textSize(width/50);
     fill(255);
@@ -125,12 +124,12 @@ void draw() {
 void keyPressed() {
   if(prep&&keyCode==32) {
     startTime=millis();
-    prep = false;
     score=0;
+    prep = false;
   } else if(numDead>ballArray.length/5.0&&keyCode==32) {
-    setup();
     loop();
     prep=false;
+    setup();
   }
 }
 void mouseClicked(){
@@ -148,8 +147,10 @@ void mouseClicked(){
       if(counter%5==0) {
         ballArray=(Ball[])append(ballArray, new Ball());
       }
+      ballArray[i].speed=(width/1000)*(3+5*(float)Math.random());
+      ballArray[i].maxLife=(int)(1000+(float)Math.random()*5000-10*score);
       didClick=true;
-      score+=1; 
+      score+=1;
       break;
     }
   }
